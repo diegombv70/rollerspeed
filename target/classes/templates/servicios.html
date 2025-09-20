@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roller Speed - Servicios</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link th:href="@{/css/estilo.css}" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Flex layout para footer al final */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        body > .content {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <section class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Nuestros Servicios</h2>
+            <div class="row g-4 text-center">
+
+                <!-- Servicio 1 -->
+                <div class="col-md-3">
+                    <div class="card shadow p-3 rounded h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Clases Principiantes</h5>
+                            <p class="card-text">Aprende a patinar desde cero con instructores expertos.</p>
+                            <p class="card-text"><strong>Edades:</strong> 5 a 12 años</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div class="col-md-3">
+                    <div class="card shadow p-3 rounded h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Entrenamiento Avanzado</h5>
+                            <p class="card-text">Programas especializados para niveles avanzados y competencias.</p>
+                            <p class="card-text"><strong>Edades:</strong> 13 años en adelante</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div class="col-md-3">
+                    <div class="card shadow p-3 rounded h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">Talleres y Eventos</h5>
+                            <p class="card-text">Talleres de técnica, freestyle y seguridad para todos los niveles.</p>
+                            <p class="card-text"><strong>Edades:</strong> Todas las edades</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Servicio 4: Inclusivo -->
+                <div class="col-md-3">
+                    <div class="card shadow p-3 rounded h-100 bg-light">
+                        <div class="card-body">
+                            <h5 class="card-title">Patinaje Inclusivo</h5>
+                            <p class="card-text">Clases y actividades diseñadas para personas con discapacidades, con atención personalizada y espacios adaptados.</p>
+                            <p class="card-text"><strong>Edades:</strong> Todas las edades</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        <p>Santa Marta, Colombia</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand" th:href="@{/}">
+    <img th:src="@{/img/logo.jpg}" alt="Logo Roller Speed" style="height: 50px;">
+</a>
+
+
+        <!-- Botón responsive -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Menú -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <!-- Institucional -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Institucional</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/mision}">Misión</a></li>
+                        <li><a class="dropdown-item" th:href="@{/vision}">Visión</a></li>
+                        <li><a class="dropdown-item" th:href="@{/valores}">Valores</a></li>
+                        <li><a class="dropdown-item" th:href="@{/servicios}">Servicios</a></li>
+                        <li><a class="dropdown-item" th:href="@{/eventos}">Eventos</a></li>
+                    </ul>
+                </li>
+
+                <!-- Usuarios -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Usuarios</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/usuarios/nuevo}">Nuevo Usuario</a></li>
+                        <li><a class="dropdown-item" th:href="@{/usuarios/listar}">Lista de Estudiantes</a></li>
+                    </ul>
+                </li>
+
+                <!-- Instructores -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Instructores</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/instructores/nuevo}">Nuevo Instructor</a></li>
+                        <li><a class="dropdown-item" th:href="@{/instructores/listar}">Lista de Instructores</a></li>
+                    </ul>
+                </li>
+
+                <!-- Clases -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Clases</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/clases/nuevo}">Nueva Clase</a></li>
+                        <li><a class="dropdown-item" th:href="@{/clases/listar}">Lista de Clases</a></li>
+                    </ul>
+                </li>
+
+                <!-- Asistencias -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Asistencias</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/asistencias/nuevo}">Registrar Asistencia</a></li>
+                        <li><a class="dropdown-item" th:href="@{/asistencias/listar}">Lista de Asistencias</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

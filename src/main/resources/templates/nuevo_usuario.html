@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario - Roller Speed</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link th:href="@{/css/estilo.css}" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Registro de Nuevo Usuario</h2>
+        <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post" class="shadow p-4 rounded bg-light">
+            
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" class="form-control" th:field="*{nombre}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Fecha de Nacimiento</label>
+                    <input type="date" class="form-control" th:field="*{fechaNacimiento}" required>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="rol" class="form-label">Tipo de Usuario</label>
+                <select class="form-select" id="rol" name="rol">
+                    <option value="ALUMNO" selected>Alumno</option>
+                    <option value="ALUMNO CON CAPACIDADES ESPECIALES">Alumno con capacidades especiales</option>
+                </select>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Género</label>
+                    <select class="form-select" th:field="*{genero}">
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otros</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Teléfono</label>
+                    <input type="text" class="form-control" th:field="*{telefono}" required>
+                </div>
+            </div>
+
+            <!-- Nueva sección Clase -->
+            <div class="mb-3">
+                <label class="form-label">Clase</label>
+                <select class="form-select" th:field="*{clase}">
+                    <option value="Principiantes">Principiantes</option>
+                    <option value="Avanzada">Avanzada</option>
+                    <option value="Inclusivo">Inclusivo</option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Correo</label>
+                <input type="email" class="form-control" th:field="*{correo}" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Contraseña</label>
+                <input type="password" class="form-control" th:field="*{password}" required>
+            </div>
+
+            <button type="submit" class="btn btn-success w-100">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        <p>Santa Marta, Colombia</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

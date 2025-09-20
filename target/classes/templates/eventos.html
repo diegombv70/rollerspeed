@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Roller Speed</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link th:href="@{/css/estilo.css}" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Flex layout para footer al final */
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+        }
+        body > .content {
+            flex: 1 0 auto;
+        }
+        footer {
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Contenido principal -->
+<div class="content">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Próximos Eventos</h2>
+        <div class="row text-center g-4">
+            <div class="col-md-4 mb-3" th:each="evento : ${eventos}">
+                <div class="card shadow p-3 rounded h-100">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${evento.nombre}">Nombre del Evento</h5>
+                        <p class="card-text" th:text="${evento.fecha}">Fecha del Evento</p>
+                        <p class="card-text" th:text="${evento.descripcion}">Descripción del evento</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        <p>Santa Marta, Colombia</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

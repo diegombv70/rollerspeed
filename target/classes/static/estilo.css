@@ -1,0 +1,147 @@
+/* ===========================
+   General
+=========================== */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #343a40;
+}
+
+/* ===========================
+   Banner principal
+=========================== */
+.banner {
+    background-image: url('/img/fondo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(0,0,0,0.5);
+    background-blend-mode: darken;
+    color: white;
+    text-align: center;
+    padding: 100px 15px;
+}
+
+.banner h1 {
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    margin-bottom: 20px;
+}
+
+.banner p {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.6);
+    margin-bottom: 30px;
+}
+
+.banner .btn {
+    margin: 5px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.banner .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* ===========================
+   Panel de tarjetas / Dashboard
+=========================== */
+.dashboard-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 25px 15px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+.dashboard-card i {
+    font-size: 2.5rem;
+    color: #343a40;
+    margin-bottom: 10px;
+    transition: color 0.3s;
+}
+
+.dashboard-card:hover i {
+    color: #ffc107;
+}
+
+.dashboard-card span {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.dashboard-card a {
+    text-decoration: none;
+    color: white;
+    background-color: #343a40;
+    padding: 7px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s, color 0.3s, transform 0.2s;
+}
+
+.dashboard-card a:hover {
+    background-color: #ffc107;
+    color: #343a40;
+    transform: translateY(-2px);
+}
+
+/* ===========================
+   Secciones y títulos
+=========================== */
+.welcome-title {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 40px;
+}
+
+/* ===========================
+   Tarjetas sección "Nuestra Escuela"
+=========================== */
+.card-img-top {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===========================
+   Footer
+=========================== */
+footer {
+    background-color: #1a7adb;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    font-size: 0.9rem;
+}
+
+/* ===========================
+   Responsive
+=========================== */
+@media (max-width: 768px) {
+    .banner h1 {
+        font-size: 2rem;
+    }
+    .banner p {
+        font-size: 1rem;
+    }
+    .dashboard-card i {
+        font-size: 2rem;
+    }
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Clase - Roller Speed</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link th:href="@{/css/estilo.css}" rel="stylesheet">
+    <style>
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; }
+        .content { flex: 1; }
+    </style>
+</head>
+<body>
+
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<div class="content">
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Registrar Clase</h2>
+        <form th:action="@{/clases/guardar}" th:object="${clase}" method="post" class="shadow p-4 rounded bg-light">
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Tipo de Clase</label>
+                    <select class="form-select" th:field="*{nombre}" required>
+                        <option th:each="tipo : ${tipos}" th:value="${tipo}" th:text="${tipo}"></option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">Nivel</label>
+                    <select class="form-select" th:field="*{nivel}" required>
+                        <option th:each="nivel : ${niveles}" th:value="${nivel}" th:text="${nivel}"></option>
+                    </select>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label">Horario</label>
+                    <input type="text" class="form-control" th:field="*{horario}" required>
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label">instructores</label>
+                    <select class="form-select" th:field="*{instructor.id}" required>
+                        <option th:each="ins : ${instructores}" th:value="${ins.id}" th:text="${ins.nombre}"></option>
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success w-100">Guardar</button>
+        </form>
+    </div>
+</div>
+
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        <p>Santa Marta, Colombia</p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script th:src="@{/js/script.js}"></script>
+</body>
+</html>

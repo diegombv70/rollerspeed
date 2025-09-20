@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roller Speed - Inicio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- CSS personalizado -->
+    <link th:href="@{/css/estilo.css}" rel="stylesheet">
+    <!-- FontAwesome para iconos -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- Navbar -->
+<div th:replace="fragments/navbar :: navbar"></div>
+
+<!-- Hero / Banner principal con fondo dinámico -->
+<section class="hero text-white text-center" 
+         style="background-size: cover; 
+                background-position: center; 
+                padding: 6rem 0; 
+                background-blend-mode: darken;">
+    <div class="container">
+        <h1 class="display-4 fw-bold" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+            Bienvenido a Roller Speed
+        </h1>
+        <p class="lead mb-4" style="text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.6);">
+            Aquí no hay límites: todos crecemos, todos avanzamos.
+        </p>
+        <a th:href="@{/servicios}" class="btn btn-secondary btn-lg">Nuestros Servicios</a>
+    </div>
+</section>
+
+<!-- Sección: Sobre la escuela -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">Nuestra Escuela</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <img th:src="@{/img/clase1.jpg}" class="card-img-top" alt="Clases de Patinaje">
+                    <div class="card-body">
+                        <h5 class="card-title">Clases para Todos</h5>
+                        <p class="card-text">Ofrecemos programas personalizados para todos, desde principiantes hasta avanzados, con un enfoque inclusivo que da la bienvenida a cada persona sin excepción.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <img th:src="@{/img/instructor1.jpg}" class="card-img-top" alt="Instructores">
+                    <div class="card-body">
+                        <h5 class="card-title">Instructores Expertos</h5>
+                        <p class="card-text">PContamos con instructores altamente calificados que ofrecen orientación profesional y programas personalizados para todos los niveles, en un entorno inclusivo y seguro donde cada participante puede desarrollarse al máximo.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm h-100">
+                    <img th:src="@{/img/evento1.jpg}" class="card-img-top" alt="Eventos">
+                    <div class="card-body">
+                        <h5 class="card-title">Eventos y Competencias</h5>
+                        <p class="card-text">Organizamos eventos y competencias para todos los niveles, ofreciendo un entorno inclusivo y motivador donde cada participante puede demostrar sus habilidades y superarse en comunidad.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Footer simple -->
+<footer class="bg-dark text-white py-4 mt-5">
+    <div class="container text-center">
+        <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+        <p>Santa Marta, Colombia</p>
+    </div>
+</footer>
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Fondo dinámico -->
+<script>
+  const fondo = document.querySelector('.hero');
+  const imagenes = [
+    '/img/fondo.jpg',
+    '/img/fondo2.jpg',
+    '/img/fondo3.jpg',
+    '/img/fondo4.jpg',
+    '/img/fondo5.jpg'
+  ];
+  let index = 0;
+  // Inicializar el primer fondo
+  fondo.style.backgroundImage = `url('${imagenes[0]}')`;
+
+  setInterval(() => {
+    index = (index + 1) % imagenes.length;
+    fondo.style.backgroundImage = `url('${imagenes[index]}')`;
+  }, 5000); // cambia cada 5 segundos
+</script>
+
+</body>
+</html>
