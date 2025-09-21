@@ -3,6 +3,8 @@ package com.rollerspeed.model;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
@@ -10,7 +12,8 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nombre;
-    private LocalDate fechaNacimiento;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate fechaNacimiento;;
     private String genero;
     private String correo;
     private String telefono;
@@ -27,6 +30,7 @@ public class Usuario {
 
     public LocalDate getFechaNacimiento() { return fechaNacimiento; }
     public void setFechaNacimiento(LocalDate fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
+    
 
     public String getGenero() { return genero; }
     public void setGenero(String genero) { this.genero = genero; }

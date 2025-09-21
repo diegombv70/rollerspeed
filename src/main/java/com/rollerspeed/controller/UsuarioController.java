@@ -1,5 +1,6 @@
 package com.rollerspeed.controller;
 
+import com.rollerspeed.model.Clase;
 import com.rollerspeed.model.Usuario;
 import com.rollerspeed.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,4 +49,27 @@ public class UsuarioController {
         usuarioRepository.deleteById(id);
         return "redirect:/usuarios/listar";
     }
+
+    // Editar usuario
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
+        Usuario usuario = usuarioRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Usuario no encontrado con id: " + id));
+        model.addAttribute("usuario", usuario);
+        return "editar_usuario"; // la vista del formulario de edición
+    }
+
+    // Actualizar usuario
+    @PostMapping("/actualizar/{id}")
+    public String actualizarUsuario(@PathVariable("id") Long id,
+                                    @ModelAttribute Usuario usuario,
+                                    @RequestParam("rol") String rol,
+                                    @RequestParam("clase") String clase) {
+        usuario.setId(id);
+        usuario.setRol(rol);
+        usuario.setClase(clase);
+        usuarioRepository.save(usuario);
+        return "redirect:/usuarios/listar";
+    }
+
 }

@@ -3,26 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Instructores - Roller Speed</title>
+    <title>Lista de Horarios - Roller Speed</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS personalizado -->
     <link th:href="@{/css/estilo.css}" rel="stylesheet">
-    <!-- FontAwesome -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Flex layout para footer al final */
         html, body {
             height: 100%;
-            margin: 0;
+        }
+        body {
             display: flex;
             flex-direction: column;
         }
-        body > .content {
-            flex: 1 0 auto;
-        }
-        footer {
-            flex-shrink: 0;
+        .content {
+            flex: 1;
         }
     </style>
 </head>
@@ -34,44 +29,44 @@
 <!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Lista de Instructores</h2>
+        <h2 class="text-center mb-4">Lista de Horarios</h2>
+        
         <table class="table table-hover table-bordered shadow-sm bg-light">
             <thead class="table-dark">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Teléfono</th>
-                    <th>Fecha de Nacimiento</th>
+                    <th>ID</th>
+                    <th>Descripción</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="ins : ${instructores}">
-                    <td th:text="${ins.nombre}"></td>
-                    <td th:text="${ins.correo}"></td>
-                    <td th:text="${ins.telefono}"></td>
-                    <td th:text="${ins.fechaNacimiento}"></td>
-                    <td class="text-center">
+                <tr th:each="h : ${horarios}">
+                    <td th:text="${h.id}"></td>
+                    <td th:text="${h.descripcion}"></td>
+                    <td>
                         <!-- Botón Editar -->
-                        <a th:href="@{'/instructores/editar/' + ${ins.id}}" 
-                           class="btn btn-sm btn-warning me-2">
-                            <i class="fa fa-pen"></i> Editar
+                        <a th:href="@{'/horarios/editar/' + ${h.id}}" 
+                           class="btn btn-warning btn-sm">
+                           Editar
                         </a>
                         <!-- Botón Eliminar -->
-                        <a th:href="@{'/instructores/eliminar/' + ${ins.id}}" 
-                           class="btn btn-sm btn-danger"
-                           onclick="return confirm('¿Seguro que deseas eliminar este instructor?');">
-                            <i class="fa fa-trash"></i> Eliminar
+                        <a th:href="@{'/horarios/eliminar/' + ${h.id}}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Seguro que quieres eliminar este horario?');">
+                           Eliminar
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
+
+        <!-- Botón para crear nuevo horario -->
+        <a th:href="@{/horarios/nuevo}" class="btn btn-primary mt-3">Crear Nuevo Horario</a>
     </div>
 </div>
 
-<!-- Footer -->
-<footer class="bg-dark text-white py-4 mt-5">
+<!-- Footer siempre al final -->
+<footer class="bg-dark text-white py-4 mt-auto">
     <div class="container text-center">
         <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
         <p>Santa Marta, Colombia</p>

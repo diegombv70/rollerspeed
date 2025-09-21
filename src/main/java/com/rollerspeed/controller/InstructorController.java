@@ -37,4 +37,29 @@ public class InstructorController {
         model.addAttribute("instructores", instructores);
         return "instructores"; // Thymeleaf HTML
     }
+
+    // Eliminar instructor
+    @GetMapping("/eliminar/{id}")
+    public String eliminarInstructor(@PathVariable("id") Long id) {
+        instructorRepository.deleteById(id);
+        return "redirect:/instructores/listar";
+    }
+
+    // Mostrar formulario de edición
+    @GetMapping("/editar/{id}")
+    public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
+        Instructor instructor = instructorRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Instructor no encontrado con id: " + id));
+        model.addAttribute("instructor", instructor);
+        return "editar_instructor"; // vista del formulario de edición
+    }
+
+    // Actualizar instructor
+    @PostMapping("/actualizar/{id}")
+    public String actualizarInstructor(@PathVariable("id") Long id,
+                                       @ModelAttribute Instructor instructor) {
+        instructor.setId(id); // asegurar que se mantiene el mismo ID
+        instructorRepository.save(instructor);
+        return "redirect:/instructores/listar";
+    }
 }

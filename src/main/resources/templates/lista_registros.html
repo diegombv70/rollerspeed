@@ -3,22 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Usuarios - Roller Speed</title>
+    <title>Lista de Registros - Roller Speed</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- CSS personalizado -->
     <link th:href="@{/css/estilo.css}" rel="stylesheet">
     <style>
-        html, body {
-            height: 100%;
-        }
-        body {
-            display: flex;
-            flex-direction: column;
-        }
-        .content {
-            flex: 1;
-        }
+        html, body { height: 100%; }
+        body { display: flex; flex-direction: column; }
+        .content { flex: 1; }
     </style>
 </head>
 <body>
@@ -29,41 +22,45 @@
 <!-- Contenido principal -->
 <div class="content">
     <div class="container mt-5">
-        <h2 class="text-center mb-4">Lista de Estudiantes</h2>
+        <h2 class="text-center mb-4">Lista de Inscripciones</h2>
+
+        <!-- Botón para crear nuevo registro -->
+        <a th:href="@{/registros/nuevo}" class="btn btn-primary mb-3">Nuevo Registro</a>
+
         <table class="table table-hover table-bordered shadow-sm bg-light">
             <thead class="table-dark">
                 <tr>
-                    <th>Nombre</th>
-                    <th>Correo</th>
-                    <th>Género</th>
-                    <th>Fecha de Nacimiento</th>
-                    <th>Teléfono</th>
-                    <th>Rol</th>
+                    <th>ID</th>
+                    <th>Usuario</th>
                     <th>Clase</th>
+                    <th>Horario</th>
+                    <th>Fecha de Registro</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="usuario : ${usuarios}">
-                    <td th:text="${usuario.nombre}"></td>
-                    <td th:text="${usuario.correo}"></td>
-                    <td th:text="${usuario.genero}"></td>
-                    <td th:text="${usuario.fechaNacimiento}"></td>
-                    <td th:text="${usuario.telefono}"></td>
-                    <td th:text="${usuario.rol}"></td>
-                    <td th:text="${usuario.clase}"></td>
+                <tr th:each="reg : ${registros}">
+                    <td th:text="${reg.id}"></td>
+                    <td th:text="${reg.usuario.nombre}"></td>
+                    <td th:text="${reg.clase.nombre}"></td>
+                    <td th:text="${reg.horario.descripcion}"></td>
+                    <td th:text="${reg.fechaRegistro}"></td>
                     <td>
-                        <a th:href="@{'/usuarios/eliminar/' + ${usuario.id}}" 
-                           class="btn btn-danger btn-sm"
-                           onclick="return confirm('¿Estás seguro que quieres eliminar este usuario?');">
-                           Eliminar
-                        </a>
                         <!-- Botón Editar -->
-                        <a th:href="@{'/usuarios/editar/' + ${usuario.id}}" 
+                        <a th:href="@{'/registros/editar/' + ${reg.id}}" 
                            class="btn btn-warning btn-sm">
                            Editar
                         </a>
+                        <!-- Botón Eliminar -->
+                        <a th:href="@{'/registros/eliminar/' + ${reg.id}}" 
+                           class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Seguro que quieres eliminar este registro?');">
+                           Eliminar
+                        </a>
                     </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(registros)}">
+                    <td colspan="6" class="text-center">No hay registros aún</td>
                 </tr>
             </tbody>
         </table>

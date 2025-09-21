@@ -2,9 +2,8 @@
     <div class="container">
         <!-- Logo -->
         <a class="navbar-brand" th:href="@{/}">
-    <img th:src="@{/img/logo.jpg}" alt="Logo Roller Speed" style="height: 50px;">
-</a>
-
+            <img th:src="@{/img/logo.jpg}" alt="Logo Roller Speed" style="height: 50px;">
+        </a>
 
         <!-- Botón responsive -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
@@ -15,6 +14,7 @@
         <!-- Menú -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
+
                 <!-- Institucional -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Institucional</a>
@@ -54,6 +54,15 @@
                     </ul>
                 </li>
 
+                <!-- Registros -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Registros</a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" th:href="@{/registros/nuevo}">Nuevo Registro</a></li>
+                        <li><a class="dropdown-item" th:href="@{/registros/listar}">Lista de Registros</a></li>
+                    </ul>
+                </li>
+
                 <!-- Asistencias -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Asistencias</a>
@@ -62,6 +71,7 @@
                         <li><a class="dropdown-item" th:href="@{/asistencias/listar}">Lista de Asistencias</a></li>
                     </ul>
                 </li>
+
             </ul>
         </div>
     </div>

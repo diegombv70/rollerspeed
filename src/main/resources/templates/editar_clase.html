@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Clase</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .horarios-checkboxes .form-check { margin-bottom: 5px; }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <div th:replace="fragments/navbar :: navbar"></div>
+
+    <div class="container mt-5">
+        <h2 class="text-center mb-4">Editar Clase</h2>
+        <form th:action="@{/clases/actualizar/{id}(id=${clase.id})}" 
+              th:object="${clase}" method="post" class="card p-4 shadow">
+
+            <!-- Tipo y Nivel -->
+            <div class="row mb-3">
+                <div class="col">
+                    <label class="form-label">Tipo de Clase</label>
+                    <select class="form-select" th:field="*{nombre}" required>
+                        <option value="" disabled>Selecciona un tipo</option>
+                        <option th:each="tipo : ${tipos}" 
+                                th:value="${tipo}" 
+                                th:text="${tipo}" 
+                                th:selected="${tipo == clase.nombre}">
+                        </option>
+                    </select>
+                </div>
+                <div class="col">
+                    <label class="form-label">Nivel</label>
+                    <select class="form-select" th:field="*{nivel}" required>
+                        <option value="" disabled>Selecciona un nivel</option>
+                        <option th:each="nivel : ${niveles}" 
+                                th:value="${nivel}" 
+                                th:text="${nivel}" 
+                                th:selected="${nivel == clase.nivel}">
+                        </option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Horarios -->
+            <div class="mb-3">
+                <label class="form-label">Horarios Disponibles</label>
+                <div class="horarios-checkboxes">
+                    <div th:each="h : ${horarios}" class="form-check">
+                        <input class="form-check-input" type="checkbox" 
+                               name="horarioIds" th:value="${h.id}"
+                               th:checked="${clase.horarios != null and #lists.contains(clase.horarios, h)}" />
+                        <label class="form-check-label" th:text="${h.descripcion}"></label>
+                    </div>
+                </div>
+                <!-- Botones de acción para horarios -->
+                <div class="mt-2 d-flex gap-2">
+                    <a th:href="@{/horarios/nuevo}" class="btn btn-sm btn-outline-primary">➕ Crear nuevo horario</a>
+                    <a th:href="@{/horarios/listar}" class="btn btn-sm btn-outline-secondary">📋 Ver horarios</a>
+                </div>
+            </div>
+
+            <!-- Instructor -->
+            <div class="mb-3">
+                <label class="form-label">Instructor</label>
+                <select class="form-select" th:field="*{instructor.id}" required>
+                    <option value="" disabled>Selecciona un instructor</option>
+                    <option th:each="inst : ${instructores}" 
+                            th:value="${inst.id}" 
+                            th:text="${inst.nombre}" 
+                            th:selected="${clase.instructor != null ? inst.id == clase.instructor.id : false}">
+                    </option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a th:href="@{/clases/listar}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4 mt-5">
+        <div class="container text-center">
+            <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>
+            <p>Santa Marta, Colombia</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

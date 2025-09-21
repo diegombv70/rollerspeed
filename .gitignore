@@ -1,0 +1,28 @@
+### Maven ###
+target/*
+/mvnw
+/mvnw.cmd
+/.mvn/wrapper/maven-wrapper.jar
+
+### VS Code ###
+.vscode/
+.mvn/
+
+### Logs ###
+*.log
+
+### Archivos temporales ###
+*.tmp
+*.bak
+*.swp
+*.swo
+
+### Sistema operativo ###
+# Windows
+Thumbs.db
+Desktop.ini
+
+### Configuración sensible ###
+# No subir credenciales reales
+application.properties
+application.yml
