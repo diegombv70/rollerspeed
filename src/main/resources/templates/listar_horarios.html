@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Horarios - Roller Speed</title>
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS personalizado -->
     <link th:href="@{/css/estilo.css}" rel="stylesheet">
     <style>
         html, body {
@@ -44,12 +42,12 @@
                     <td th:text="${h.id}"></td>
                     <td th:text="${h.descripcion}"></td>
                     <td>
-                        <!-- Botón Editar -->
+
                         <a th:href="@{'/horarios/editar/' + ${h.id}}" 
                            class="btn btn-warning btn-sm">
                            Editar
                         </a>
-                        <!-- Botón Eliminar -->
+                        
                         <a th:href="@{'/horarios/eliminar/' + ${h.id}}" 
                            class="btn btn-danger btn-sm"
                            onclick="return confirm('¿Seguro que quieres eliminar este horario?');">
@@ -60,12 +58,11 @@
             </tbody>
         </table>
 
-        <!-- Botón para crear nuevo horario -->
+        
         <a th:href="@{/horarios/nuevo}" class="btn btn-primary mt-3">Crear Nuevo Horario</a>
     </div>
 </div>
 
-<!-- Footer siempre al final -->
 <footer class="bg-dark text-white py-4 mt-auto">
     <div class="container text-center">
         <p>&copy; 2025 Roller Speed. Todos los derechos reservados.</p>

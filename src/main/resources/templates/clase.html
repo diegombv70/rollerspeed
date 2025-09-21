@@ -25,7 +25,7 @@
     <div class="container mt-5">
         <h2 class="text-center mb-4">Lista de Clases</h2>
         
-        <!-- Botón para crear nueva clase -->
+        
         <div class="row mb-3">
             <div class="col-12 text-end">
                 <a th:href="@{/clases/nuevo}" class="btn btn-primary">
@@ -34,7 +34,7 @@
             </div>
         </div>
         
-        <!-- Tabla de clases -->
+        
         <div class="table-responsive">
             <table class="table table-hover table-bordered shadow-sm bg-light">
                 <thead class="table-dark">
@@ -52,7 +52,7 @@
                         <td>
                             <span class="badge bg-info" th:text="${c.nivel}"></span>
                         </td>
-                        <!-- Mostrar todos los horarios como badges -->
+                        
                         <td class="horarios-list">
                             <div th:if="${c.horarios != null and !c.horarios.empty}">
                                 <span th:each="h : ${c.horarios}" 
@@ -84,7 +84,7 @@
             </table>
         </div>
 
-        <!-- Mensaje si no hay clases -->
+        
         <div th:if="${clases == null or clases.empty}" class="alert alert-info text-center mt-4">
             <h5>No hay clases registradas</h5>
             <p>¡Comienza creando tu primera clase!</p>

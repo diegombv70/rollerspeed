@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Registros - Roller Speed</title>
-    <!-- Bootstrap CSS -->
+    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- CSS personalizado -->
     <link th:href="@{/css/estilo.css}" rel="stylesheet">
     <style>
         html, body { height: 100%; }
@@ -19,12 +18,12 @@
 <!-- Navbar -->
 <div th:replace="fragments/navbar :: navbar"></div>
 
-<!-- Contenido principal -->
+
 <div class="content">
     <div class="container mt-5">
         <h2 class="text-center mb-4">Lista de Inscripciones</h2>
 
-        <!-- Botón para crear nuevo registro -->
+        
         <a th:href="@{/registros/nuevo}" class="btn btn-primary mb-3">Nuevo Registro</a>
 
         <table class="table table-hover table-bordered shadow-sm bg-light">
@@ -46,12 +45,12 @@
                     <td th:text="${reg.horario.descripcion}"></td>
                     <td th:text="${reg.fechaRegistro}"></td>
                     <td>
-                        <!-- Botón Editar -->
+                        
                         <a th:href="@{'/registros/editar/' + ${reg.id}}" 
                            class="btn btn-warning btn-sm">
                            Editar
                         </a>
-                        <!-- Botón Eliminar -->
+                        
                         <a th:href="@{'/registros/eliminar/' + ${reg.id}}" 
                            class="btn btn-danger btn-sm"
                            onclick="return confirm('¿Seguro que quieres eliminar este registro?');">

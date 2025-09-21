@@ -22,7 +22,7 @@ public class Clase {
         joinColumns = @JoinColumn(name = "clase_id"),
         inverseJoinColumns = @JoinColumn(name = "horario_id")
     )
-    @JsonIgnoreProperties("clases") // Evita loop infinito
+    @JsonIgnoreProperties("clases")
     private List<Horario> horarios = new ArrayList<>();
 
     @ManyToOne

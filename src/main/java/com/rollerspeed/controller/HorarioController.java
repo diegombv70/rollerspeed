@@ -16,29 +16,28 @@ public class HorarioController {
     @Autowired
     private HorarioRepository horarioRepository;
 
-    // Listar horarios
+    // Listar
     @GetMapping("/listar")
     public String listarHorarios(Model model) {
         List<Horario> horarios = horarioRepository.findAll();
         model.addAttribute("horarios", horarios);
-        return "listar_horarios"; // Vista Thymeleaf
+        return "listar_horarios"; 
     }
 
-    // Formulario nuevo horario
     @GetMapping("/nuevo")
     public String mostrarFormulario(Model model) {
-        model.addAttribute("horario", new Horario()); // Objeto necesario para el formulario
-        return "nuevo_horario"; // <-- Apunta al archivo en templates/ directamente
+        model.addAttribute("horario", new Horario());
+        return "nuevo_horario";
     }
 
-    // Guardar horario
+    // Guardar
     @PostMapping("/guardar")
     public String guardarHorario(Horario horario) {
         horarioRepository.save(horario);
         return "redirect:/horarios/listar";
     }
 
-    // Formulario editar horario
+    //editar
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
         Horario horario = horarioRepository.findById(id).orElse(null);
@@ -49,7 +48,6 @@ public class HorarioController {
         return "editar_horario";
     }
 
-    // Actualizar horario
     @PostMapping("/actualizar/{id}")
     public String actualizarHorario(@PathVariable("id") Long id, Horario horario) {
         Horario existente = horarioRepository.findById(id).orElse(null);
@@ -60,7 +58,7 @@ public class HorarioController {
         return "redirect:/horarios/listar";
     }
 
-    // Eliminar horario
+    // Eliminar
     @GetMapping("/eliminar/{id}")
     public String eliminarHorario(@PathVariable("id") Long id) {
         horarioRepository.deleteById(id);

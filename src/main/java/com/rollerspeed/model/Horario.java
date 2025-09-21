@@ -13,10 +13,9 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String descripcion; // Ej: "Lunes 10:00 - 12:00"
-
+    private String descripcion;
     @ManyToMany(mappedBy = "horarios")
-    @JsonIgnoreProperties("horarios") // Evita loop infinito
+    @JsonIgnoreProperties("horarios")
     private List<Clase> clases = new ArrayList<>();
 
     // Getters y setters

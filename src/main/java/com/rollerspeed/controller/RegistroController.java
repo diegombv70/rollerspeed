@@ -31,7 +31,6 @@ public class RegistroController {
     @Autowired
     private HorarioRepository horarioRepository;
 
-    // Mostrar formulario de nuevo registro
     @GetMapping("/nuevo")
     public String mostrarFormulario(Registro registro, Model model) {
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -40,11 +39,10 @@ public class RegistroController {
         model.addAttribute("registro", registro);
         model.addAttribute("usuarios", usuarios);
         model.addAttribute("clases", clases);
-        model.addAttribute("horarios", List.of()); // Se cargarán con JS al seleccionar clase
+        model.addAttribute("horarios", List.of());
         return "nuevo_registro";
     }
 
-    // Mostrar formulario de edición
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
         Registro registro = registroRepository.findById(id).orElse(null);
@@ -63,7 +61,6 @@ public class RegistroController {
         return "editar_registro";
     }
 
-    // Endpoint AJAX para cargar horarios de una clase
     @GetMapping("/horarios/{claseId}")
     @ResponseBody
     public List<Horario> obtenerHorarios(@PathVariable("claseId") Long claseId) {
@@ -74,58 +71,44 @@ public class RegistroController {
         return List.of();
     }
 
-    // Guardar inscripción nueva
     @PostMapping("/guardar")
-    public String guardarRegistro(@RequestParam Long usuarioId,
-                                  @RequestParam Long claseId,
-                                  @RequestParam Long horarioId,
-                                  Model model) {
-
-        Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
-        Clase clase = claseRepository.findById(claseId).orElse(null);
-        Horario horario = horarioRepository.findById(horarioId).orElse(null);
-
-        if (usuario == null || clase == null || horario == null) {
+    public String guardarRegistro(@ModelAttribute("registro") Registro registro, Model model) {
+        if (registro.getUsuario() == null || registro.getClase() == null || registro.getHorario() == null) {
             model.addAttribute("error", "Usuario, clase o horario inválido");
+            model.addAttribute("usuarios", usuarioRepository.findAll());
+            model.addAttribute("clases", claseRepository.findAll());
+            model.addAttribute("horarios", registro.getClase() != null ? registro.getClase().getHorarios() : List.of());
             return "nuevo_registro";
         }
 
-        Registro registro = new Registro();
-        registro.setUsuario(usuario);
-        registro.setClase(clase);
-        registro.setHorario(horario);
         registroRepository.save(registro);
-
         return "redirect:/registros/listar";
     }
 
-    // Actualizar registro existente
     @PostMapping("/actualizar/{id}")
     public String actualizarRegistro(@PathVariable("id") Long id,
-                                     @RequestParam Long usuarioId,
-                                     @RequestParam Long claseId,
-                                     @RequestParam Long horarioId,
+                                     @ModelAttribute("registro") Registro registroForm,
                                      Model model) {
 
         Registro registro = registroRepository.findById(id).orElse(null);
-        Usuario usuario = usuarioRepository.findById(usuarioId).orElse(null);
-        Clase clase = claseRepository.findById(claseId).orElse(null);
-        Horario horario = horarioRepository.findById(horarioId).orElse(null);
+        if (registro == null || registroForm.getUsuario() == null ||
+            registroForm.getClase() == null || registroForm.getHorario() == null) {
 
-        if (registro == null || usuario == null || clase == null || horario == null) {
             model.addAttribute("error", "Datos inválidos para actualizar");
+            model.addAttribute("usuarios", usuarioRepository.findAll());
+            model.addAttribute("clases", claseRepository.findAll());
+            model.addAttribute("horarios", registroForm.getClase() != null ? registroForm.getClase().getHorarios() : List.of());
             return "editar_registro";
         }
 
-        registro.setUsuario(usuario);
-        registro.setClase(clase);
-        registro.setHorario(horario);
+        registro.setUsuario(registroForm.getUsuario());
+        registro.setClase(registroForm.getClase());
+        registro.setHorario(registroForm.getHorario());
         registroRepository.save(registro);
 
         return "redirect:/registros/listar";
     }
 
-    // Listar inscripciones
     @GetMapping("/listar")
     public String listarRegistros(Model model) {
         List<Registro> registros = registroRepository.findAll();
@@ -133,7 +116,6 @@ public class RegistroController {
         return "lista_registros";
     }
 
-    // Eliminar inscripción
     @GetMapping("/eliminar/{id}")
     public String eliminarRegistro(@PathVariable("id") Long id) {
         registroRepository.deleteById(id);

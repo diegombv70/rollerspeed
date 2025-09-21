@@ -28,14 +28,13 @@ public class ClaseController {
     @Autowired
     private HorarioRepository horarioRepository;
 
-    // Crear nueva clase
     @GetMapping("/nuevo")
     public String mostrarFormulario(Clase clase, Model model) {
         cargarListas(model);
         return "nueva_clase";
     }
 
-    // Guardar clase
+    // Guardar
     @PostMapping("/guardar")
     public String guardarClase(Clase clase, @RequestParam(required = false) List<Long> horarioIds) {
         // Asociar instructor
@@ -44,7 +43,6 @@ public class ClaseController {
             clase.setInstructor(instructor);
         }
 
-        // Asociar horarios seleccionados y sincronizar relación bidireccional
         if (horarioIds != null && !horarioIds.isEmpty()) {
             List<Horario> horariosSeleccionados = horarioRepository.findAllById(horarioIds);
             clase.setHorarios(horariosSeleccionados);
@@ -63,22 +61,22 @@ public class ClaseController {
         return "redirect:/clases/listar";
     }
 
-    // Listar clases
+    // Listar
     @GetMapping("/listar")
     public String listarClases(Model model) {
         List<Clase> clases = claseRepository.findAll();
-        List<Horario> horarios = horarioRepository.findAll(); // Agregamos todos los horarios
+        List<Horario> horarios = horarioRepository.findAll();
         model.addAttribute("clases", clases);
-        model.addAttribute("horarios", horarios); // <-- esto es clave
+        model.addAttribute("horarios", horarios); 
         return "clase";
     }
 
-    // Eliminar clase
+    // Eliminar
     @GetMapping("/eliminar/{id}")
     public String eliminarClase(@PathVariable("id") Long id) {
         Clase clase = claseRepository.findById(id).orElse(null);
         if (clase != null) {
-            // Desvincular horarios antes de eliminar para evitar problemas de FK
+            
             if (clase.getHorarios() != null) {
                 for (Horario h : clase.getHorarios()) {
                     h.getClases().remove(clase);
@@ -89,7 +87,7 @@ public class ClaseController {
         return "redirect:/clases/listar";
     }
 
-    // Editar clase
+    // Editar
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
         Clase clase = claseRepository.findById(id).orElse(null);
@@ -101,7 +99,6 @@ public class ClaseController {
         return "editar_clase";
     }
 
-    // Actualizar clase
     @PostMapping("/actualizar/{id}")
     public String actualizarClase(@PathVariable("id") Long id, Clase clase, 
                                   @RequestParam(required = false) List<Long> horarioIds) {
@@ -110,16 +107,12 @@ public class ClaseController {
             existente.setNombre(clase.getNombre());
             existente.setNivel(clase.getNivel());
 
-            // Actualizar instructor
             if (clase.getInstructor() != null && clase.getInstructor().getId() != null) {
                 Instructor instructor = instructorRepository.findById(clase.getInstructor().getId()).orElse(null);
                 existente.setInstructor(instructor);
             } else {
                 existente.setInstructor(null);
             }
-
-            // Actualizar horarios y sincronizar relación bidireccional
-            // Primero desvincular horarios anteriores
             if (existente.getHorarios() != null) {
                 for (Horario h : existente.getHorarios()) {
                     h.getClases().remove(existente);

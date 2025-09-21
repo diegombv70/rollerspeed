@@ -17,7 +17,7 @@
         <form th:action="@{/clases/actualizar/{id}(id=${clase.id})}" 
               th:object="${clase}" method="post" class="card p-4 shadow">
 
-            <!-- Tipo y Nivel -->
+            
             <div class="row mb-3">
                 <div class="col">
                     <label class="form-label">Tipo de Clase</label>
@@ -43,7 +43,7 @@
                 </div>
             </div>
 
-            <!-- Horarios -->
+            
             <div class="mb-3">
                 <label class="form-label">Horarios Disponibles</label>
                 <div class="horarios-checkboxes">
@@ -54,14 +54,14 @@
                         <label class="form-check-label" th:text="${h.descripcion}"></label>
                     </div>
                 </div>
-                <!-- Botones de acción para horarios -->
+                
                 <div class="mt-2 d-flex gap-2">
-                    <a th:href="@{/horarios/nuevo}" class="btn btn-sm btn-outline-primary">➕ Crear nuevo horario</a>
+                    <a th:href="@{/horarios/nuevo}" class="btn btn-sm btn-outline-primary">Crear nuevo horario</a>
                     <a th:href="@{/horarios/listar}" class="btn btn-sm btn-outline-secondary">📋 Ver horarios</a>
                 </div>
             </div>
 
-            <!-- Instructor -->
+            
             <div class="mb-3">
                 <label class="form-label">Instructor</label>
                 <select class="form-select" th:field="*{instructor.id}" required>

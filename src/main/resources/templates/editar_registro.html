@@ -11,10 +11,10 @@
 
     <div class="container mt-5">
         <h2 class="text-center mb-4">Editar Registro</h2>
+
         <form th:action="@{/registros/actualizar/{id}(id=${registro.id})}" 
               th:object="${registro}" method="post" class="card p-4 shadow">
 
-            <!-- Usuario -->
             <div class="mb-3">
                 <label class="form-label">Usuario</label>
                 <select class="form-select" th:field="*{usuario.id}" required>
@@ -27,11 +27,10 @@
                 </select>
             </div>
 
-            <!-- Clase -->
             <div class="mb-3">
                 <label class="form-label">Clase</label>
                 <select class="form-select" th:field="*{clase.id}" required
-                        th:attr="onchange='cargarHorarios(this.value)'">
+                        onchange="cargarHorarios(this.value)">
                     <option value="" disabled>Selecciona una clase</option>
                     <option th:each="clase : ${clases}" 
                             th:value="${clase.id}" 
@@ -41,7 +40,7 @@
                 </select>
             </div>
 
-            <!-- Horario -->
+
             <div class="mb-3">
                 <label class="form-label">Horario</label>
                 <select class="form-select" th:field="*{horario.id}" required id="horariosSelect">
@@ -53,6 +52,7 @@
                     </option>
                 </select>
             </div>
+
 
             <div class="d-flex justify-content-between">
                 <a th:href="@{/registros/listar}" class="btn btn-secondary">Cancelar</a>
@@ -71,17 +71,28 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <!-- Script para cargar horarios dinámicamente -->
+
     <script th:inline="javascript">
         /*<![CDATA[*/
         function cargarHorarios(claseId) {
             const select = document.getElementById('horariosSelect');
+
+            if (!claseId) {
+                select.innerHTML = '<option value="" disabled>Selecciona primero una clase</option>';
+                return;
+            }
+
             select.innerHTML = '<option value="" disabled selected>Cargando...</option>';
-            
-            fetch(/*[[@{/registros/horarios/}]]*/ + claseId)
+
+            fetch('/registros/horarios/' + claseId)
                 .then(response => response.json())
                 .then(horarios => {
+                    if (!Array.isArray(horarios)) {
+                        console.error('Respuesta inválida de horarios:', horarios);
+                        select.innerHTML = '<option value="" disabled>Error al cargar horarios</option>';
+                        return;
+                    }
+
                     select.innerHTML = '<option value="" disabled>Selecciona un horario</option>';
                     horarios.forEach(h => {
                         const option = document.createElement('option');

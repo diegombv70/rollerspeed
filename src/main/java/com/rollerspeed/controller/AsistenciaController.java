@@ -26,7 +26,6 @@ public class AsistenciaController {
     @Autowired
     private ClaseRepository claseRepository;
 
-    // Mostrar formulario de nueva asistencia
     @GetMapping("/nuevo")
     public String mostrarFormulario(Asistencia asistencia, Model model) {
         List<Usuario> usuarios = usuarioRepository.findAll();
@@ -37,7 +36,7 @@ public class AsistenciaController {
         return "nueva_asistencia";
     }
 
-    // Guardar nueva asistencia
+    // Guardar
     @PostMapping("/guardar")
     public String guardarAsistencia(@RequestParam Long usuarioId,
                                     @RequestParam Long claseId,
@@ -63,7 +62,7 @@ public class AsistenciaController {
         return "redirect:/asistencias/listar";
     }
 
-    // Listar todas las asistencias
+    // Listar
     @GetMapping("/listar")
     public String listarAsistencias(Model model) {
         List<Asistencia> asistencias = asistenciaRepository.findAll();
@@ -71,7 +70,6 @@ public class AsistenciaController {
         return "lista_asistencias";
     }
 
-    // Mostrar formulario de edición de asistencia
     @GetMapping("/editar/{id}")
     public String editarAsistencia(@PathVariable Long id, Model model) {
         Asistencia asistencia = asistenciaRepository.findById(id).orElse(null);
@@ -86,21 +84,19 @@ public class AsistenciaController {
         return "editar_asistencia";
     }
 
-    // Actualizar asistencia existente
+    // Actualizar
     @PostMapping("/actualizar/{id}")
     public String actualizarAsistencia(@PathVariable Long id,
                                     @RequestParam(required = false) boolean presente) {
-        // Buscar la asistencia por ID
         Asistencia asistencia = asistenciaRepository.findById(id).orElse(null);
         if (asistencia != null) {
-            // Actualizar solo el campo presente
             asistencia.setPresente(presente);
             asistenciaRepository.save(asistencia);
         }
         return "redirect:/asistencias/listar";
     }
 
-    // Eliminar asistencia
+    // Eliminar
     @GetMapping("/eliminar/{id}")
     public String eliminarAsistencia(@PathVariable Long id) {
         asistenciaRepository.deleteById(id);

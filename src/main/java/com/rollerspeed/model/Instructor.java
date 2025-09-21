@@ -18,10 +18,8 @@ public class Instructor {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate fechaNacimiento;;
 
-    // Constructor vacío (necesario para JPA)
     public Instructor() {}
 
-    // Getters y setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

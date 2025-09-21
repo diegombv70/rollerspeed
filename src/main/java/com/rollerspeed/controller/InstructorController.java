@@ -16,49 +16,47 @@ public class InstructorController {
     @Autowired
     private InstructorRepository instructorRepository;
 
-    // Mostrar formulario para crear un instructor
     @GetMapping("/nuevo")
     public String mostrarFormulario(Model model) {
         model.addAttribute("instructor", new Instructor());
-        return "nuevo_instructor"; // Thymeleaf HTML
+        return "nuevo_instructor";
     }
 
-    // Guardar instructor en base de datos
+    // Guarda
     @PostMapping("/guardar")
     public String guardarInstructor(@ModelAttribute Instructor instructor) {
         instructorRepository.save(instructor);
         return "redirect:/instructores/listar";
     }
 
-    // Listar instructores
+    // Listarr
     @GetMapping("/listar")
     public String listarInstructores(Model model) {
         List<Instructor> instructores = instructorRepository.findAll();
         model.addAttribute("instructores", instructores);
-        return "instructores"; // Thymeleaf HTML
+        return "instructores";
     }
 
-    // Eliminar instructor
+    // Eliminar
     @GetMapping("/eliminar/{id}")
     public String eliminarInstructor(@PathVariable("id") Long id) {
         instructorRepository.deleteById(id);
         return "redirect:/instructores/listar";
     }
 
-    // Mostrar formulario de edición
     @GetMapping("/editar/{id}")
     public String mostrarFormularioEdicion(@PathVariable("id") Long id, Model model) {
         Instructor instructor = instructorRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Instructor no encontrado con id: " + id));
         model.addAttribute("instructor", instructor);
-        return "editar_instructor"; // vista del formulario de edición
+        return "editar_instructor";
     }
 
-    // Actualizar instructor
+    // Actualizar
     @PostMapping("/actualizar/{id}")
     public String actualizarInstructor(@PathVariable("id") Long id,
                                        @ModelAttribute Instructor instructor) {
-        instructor.setId(id); // asegurar que se mantiene el mismo ID
+        instructor.setId(id);
         instructorRepository.save(instructor);
         return "redirect:/instructores/listar";
     }

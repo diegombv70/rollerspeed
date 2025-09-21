@@ -12,7 +12,7 @@
     <h2 class="text-center mb-4">Inscribirse a Clase</h2>
 
     <form th:action="@{/registros/guardar}" method="post" class="card p-4 shadow">
-        <!-- Seleccionar Usuario -->
+        
         <div class="mb-3">
             <label class="form-label">Alumno</label>
             <select class="form-select" name="usuarioId" required>
@@ -21,7 +21,7 @@
             </select>
         </div>
 
-        <!-- Seleccionar Clase -->
+        
         <div class="mb-3">
             <label class="form-label">Clase</label>
             <select class="form-select" id="claseSelect" name="claseId" required>
@@ -30,7 +30,7 @@
             </select>
         </div>
 
-        <!-- Horarios disponibles (se llenan según clase) -->
+        
         <div class="mb-3">
             <label class="form-label">Horarios Disponibles</label>
             <div id="horariosContainer">
@@ -50,7 +50,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Cargar horarios vía AJAX cuando cambie la clase
+    
     document.getElementById('claseSelect').addEventListener('change', function() {
         const claseId = this.value;
         const container = document.getElementById('horariosContainer');
@@ -68,7 +68,7 @@
                     return;
                 }
 
-                // Crear radio buttons para horarios
+                
                 let html = '';
                 horarios.forEach(h => {
                     html += `

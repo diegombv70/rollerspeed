@@ -12,13 +12,13 @@ public class Registro {
     private Long id;
 
     @ManyToOne
-    private Usuario usuario;  // Alumno inscrito
+    private Usuario usuario;
 
     @ManyToOne
-    private Clase clase;      // Clase en la que se inscribe
+    private Clase clase; 
 
     @ManyToOne
-    private Horario horario;  // Horario seleccionado
+    private Horario horario; 
 
     private LocalDate fechaRegistro = LocalDate.now();
 
